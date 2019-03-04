@@ -8,6 +8,7 @@ std::uniform_real_distribution<double> randrange(-1, 1);
 double monitor_refresh_rate = 60;
 bool vsync = true;
 
+//these are functions so you can add randomness to them if you want to simulate "a slow frame every now and then" and stuff
 double game_update_time() {
     return .00001;
 }
@@ -21,16 +22,15 @@ double busy_time() {
     return .000001;
 }
 
-double timing_fuzziness = 1.0 / 60.0 * .005;
-
 double system_time = randrange(rng) * 10000;
 
-
+double timing_fuzziness = 1.0 / 60.0 * .005;
 double fuzzy(){
     std::uniform_real_distribution<double> dist(-timing_fuzziness, timing_fuzziness);
     return dist(rng);
 }
 
+//measurements
 int frame_updates = 0;
 double total_updates = 0;
 int last_vsync = 0;
@@ -72,7 +72,7 @@ void simulate_busy(){
     system_time += std::max(0.0, busy_time() + fuzzy() * .00001);
 }
 
-
+//this is where you test your game loop
 int main() {
     double prev_frame_time = system_time;
     last_vsync = round(system_time * monitor_refresh_rate);
