@@ -13,7 +13,7 @@ double game_update_time() {
     return .00001;
 }
 double game_render_time() {
-    return .02;
+    return .005;
 }
 double game_display_time() {
     return .000001;
