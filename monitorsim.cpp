@@ -22,7 +22,9 @@ double busy_time() {
     return .000001;
 }
 
-double system_time = randrange(rng) * 10000;
+//system time at 0 helps find rounding issues when the system timer is "in sync" with the game timer
+//randomizing it is "more accurate"
+double system_time = 0;//randrange(rng) * 10000;
 
 double timing_fuzziness = 1.0 / 60.0 * .005;
 double fuzzy(){
