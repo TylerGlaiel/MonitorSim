@@ -88,11 +88,9 @@ int main() {
         accumulator += delta_frame_time;
         prev_frame_time = current_frame_time;
 
-        while(accumulator >= 1.0 / 61.0){
+        while(accumulator >= 1.0 / 60.0){
             simulate_update();
-            accumulator -= 1.0 / 59.0;
-
-            if(accumulator < 0) accumulator = 0;
+            accumulator -= 1.0 / 60.0;
         }
 
         simulate_render();
